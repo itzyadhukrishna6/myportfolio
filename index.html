@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio - Yadhukrishna</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/src/style.css">
+  <style>
+    /* Preliminary Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-family: 'Inter', sans-serif;
+      background-color: #F2F2F2;
+      color: #000000;
+      overflow-x: hidden;
+    }
+  </style>
+  <style>
+    /* Hide loader immediately if visited */
+    html.skip-loader .loading-screen {
+      display: none;
+    }
+
+    html.skip-loader .hero-title,
+    html.skip-loader .hero-subtitle,
+    html.skip-loader .reveal-item {
+      opacity: 1;
+      transform: none;
+    }
+
+    html.skip-loader .navbar {
+      opacity: 1;
+      transform: translateX(-50%);
+    }
+  </style>
+  <script>
+    if (sessionStorage.getItem('hasVisited')) {
+      document.documentElement.classList.add('skip-loader');
+    }
+  </script>
+</head>
+
+<body>
+  <!-- Loading Screen -->
+  <!-- Loading Screen -->
+  <!-- Loading Screen -->
+  <div class="loading-screen">
+    <div class="loading-bg"></div>
+    <div class="loader-content">
+      <div class="loading-text">
+        <span>Y</span><span>A</span><span>D</span><span>H</span><span>U</span>
+      </div>
+      <div class="loading-line-container">
+        <div class="loading-line"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cursor Follower -->
+  <div class="cursor-follower"></div>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="nav-brand" style="position: relative;">
+      <a href="/" style="color: inherit; text-decoration: none;">YADHUKRISHNA</a>
+    </div>
+
+    <nav>
+      <div class="nav-links desktop-only">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+      <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </button>
+    </nav>
+
+    <!-- Hanging Framer Theme Switch -->
+    <div class="theme-switch-wrapper" id="theme-switch-wrapper">
+      <div class="theme-string" id="theme-string"></div>
+      <div class="theme-box" id="theme-pull-box">
+        <i class="fa-solid fa-moon"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+    <div class="mobile-menu-content">
+      <div class="mobile-menu-header">
+        <div class="mobile-brand">YADHUKRISHNA</div>
+        <button class="close-menu-btn" id="close-menu-btn">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="mobile-nav-links">
+        <a href="#about" class="mobile-nav-link">ABOUT</a>
+        <a href="#work" class="mobile-nav-link">WORK</a>
+        <a href="#contact" class="mobile-nav-link">CONTACT</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+      <!-- Dynamic Image Trail Component Container -->
+      <div id="image-trail-container" class="image-trail-container"></div>
+
+      <div class="hero-background-lines"></div>
+
+      <div class="hero-content">
+        <!-- Profile & Status -->
+        <div class="profile-container-row reveal-item">
+          <div class="profile-image-wrapper">
+            <img src="./public/images/profile.jpeg" alt="Yadhu Krishna Profile"
+              onerror="this.onerror=null; this.src='https://via.placeholder.com/150';" />
+          </div>
+          <div class="current-info">
+            <span class="current-label">Currently at</span>
+            <span class="company-logo">Deloitte<span style="color: #86bc25;">.</span></span>
+          </div>
+        </div>
+
+        <h1 class="hero-title reveal-item">
+          <span>yadhu</span>
+          <span>kr<span class="custom-i">ı</span>shna</span>
+        </h1>
+        <p class="hero-subtitle reveal-item"></p>
+        <div class="hero-vertical-line"></div>
+      </div>
+
+      <!-- Mobile/Tablet Hero Footer -->
+      <div class="hero-footer-responsive reveal-item"
+        style="display: flex; align-items: center; justify-content: space-between;">
+        <div class="volume-control-hero" style="display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-volume-high" id="volume-icon" style="font-size: 1.2rem;"></i>
+
+        </div>
+        <div class="location-info">
+          Kannur, <strong>Kerala</strong>
+        </div>
+      </div>
+
+      <div class="scroll-indicator desktop-only">
+        <i class="fa-solid fa-arrow-down"></i>
+      </div>
+    </section>
+
+    <!-- About Section (Dark Mode Transition) -->
+    <section class="about-section" id="about" data-theme="dark">
+      <div class="about-content reveal-text">
+        <div class="about-left" style="display: flex; flex-direction: column;">
+          <h2>About</h2>
+          <div class="playful-eyes" id="playful-eyes">
+            <div class="eye">
+              <div class="pupil"></div>
+            </div>
+            <div class="eye">
+              <div class="pupil"></div>
+            </div>
+          </div>
+        </div>
+        <div class="about-text">
+          <p>
+            Yadhu is a UI/UX Developer with an eye for detail,
+            <span class="highlight-grey">crafting intuitive digital experiences that come to life on the
+              internet.</span>
+          </p>
+          <p>
+            He completed his studies with a strong academic record and holds certifications in UI/UX Fundamentals, Web
+            Design, and React Development
+            <span class="highlight-grey">and has been building real world products ever since.</span>
+          </p>
+          <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+            <a href="./public/resume.pdf" target="_blank" class="btn-outline white">View Resume <i
+                class="fa-regular fa-file-pdf"></i></a>
+            <a href="./public/resume.pdf" download="Yadhu_Resume.pdf" class="btn-outline white">Download Resume <i
+                class="fa-solid fa-download"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ScrollFlow Marquee Section -->
+    <section class="scrollflow-section" data-theme="dark">
+      <div class="scrollflow-track dir-left">
+        <h2 class="scrollflow-text">
+          UI/UX DESIGN &nbsp;&bull;&nbsp; INTERACTION &nbsp;&bull;&nbsp; STRATEGY &nbsp;&bull;&nbsp; PROTOTYPING
+          &nbsp;&bull;&nbsp; UI/UX DESIGN &nbsp;&bull;&nbsp; INTERACTION &nbsp;&bull;&nbsp; STRATEGY &nbsp;&bull;&nbsp;
+          PROTOTYPING &nbsp;&bull;&nbsp;
+        </h2>
+      </div>
+      <div class="scrollflow-track dir-right">
+        <h2 class="scrollflow-text outline-text">
+          CRAFTING DIGITAL EXPERIENCES &nbsp;&bull;&nbsp; SCROLL DOWN &nbsp;&bull;&nbsp; CRAFTING DIGITAL EXPERIENCES
+          &nbsp;&bull;&nbsp; SCROLL DOWN &nbsp;&bull;&nbsp;
+        </h2>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills-section" id="skills">
+      <div class="skills-glow" id="skills-glow"></div>
+
+      <div class="skills-content">
+        <!-- Left Side: Static info + dynamic button -->
+        <div class="skills-info-left reveal-text">
+          <h2>My Skills</h2>
+          <p class="skills-general-desc">
+            I design and build digital experiences that feel effortless, intuitive, and purposeful.
+            With a strong focus on clarity and usability, I create interfaces that are visually refined and easy to
+            navigate.
+            Every interaction is carefully considered to ensure a smooth, responsive, and engaging experience.
+            From concept to execution, I pay close attention to detail, consistency, and overall user satisfaction.
+          </p>
+          <div style="display: flex; align-items: center; gap: 20px; margin-top: 2rem;">
+            <a href="#contact" class="btn-contact-skill" id="btn-contact-skill">contact me</a>
+            <a href="#work" class="see-more-skill"><i class="fa-solid fa-arrow-right"></i> see more</a>
+          </div>
+        </div>
+
+        <!-- Right Side: Rotating Orbit -->
+        <div class="skills-visual-right reveal-item">
+          <div class="orbit-wrapper">
+            <!-- Center Content -->
+            <div class="orbit-center">
+              <div class="center-icon-wrapper" id="center-icon-wrapper">
+                <!-- Icon inserted here via JS -->
+              </div>
+              <h3 id="center-skill-title"></h3>
+              <p id="center-skill-desc"></p>
+            </div>
+
+            <!-- Rotating Ring -->
+            <div class="orbit-ring" id="orbit-ring">
+              <!-- Nodes inserted here via JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Tools Section -->
+    <section class="ai-tools-section" data-theme="dark">
+      <div class="ai-tools-marquee">
+        <div class="ai-track">
+          <div class="ai-pill"><i class="fa-solid fa-robot"></i> ChatGPT</div>
+          <div class="ai-pill"><i class="fa-solid fa-paintbrush"></i> Midjourney</div>
+          <div class="ai-pill"><i class="fa-solid fa-bolt"></i> Gemini </div>
+          <div class="ai-pill"><i class="fa-solid fa-pen-nib"></i> Notion AI</div>
+          <div class="ai-pill"><i class="fa-solid fa-wand-magic-sparkles"></i> Framer AI</div>
+          <div class="ai-pill"><i class="fa-solid fa-brain"></i> Stitch AI</div>
+
+          <div class="ai-pill"><i class="fa-solid fa-robot"></i> Antigravity</div>
+          <div class="ai-pill"><i class="fa-solid fa-paintbrush"></i> Loveable </div>
+          <div class="ai-pill"><i class="fa-solid fa-bolt"></i> Claude</div>
+          <div class="ai-pill"><i class="fa-solid fa-pen-nib"></i> Picsart Ai </div>
+          <div class="ai-pill"><i class="fa-solid fa-wand-magic-sparkles"></i> Adobe Firefly </div>
+          <div class="ai-pill"><i class="fa-solid fa-brain"></i> UnDraw</div>
+        </div>
+
+        <!-- Duplicated track for seamless infinite scroll -->
+        <div class="ai-track" aria-hidden="true">
+          <div class="ai-pill"><i class="fa-solid fa-robot"></i> ChatGPT</div>
+          <div class="ai-pill"><i class="fa-solid fa-paintbrush"></i> Midjourney</div>
+          <div class="ai-pill"><i class="fa-solid fa-bolt"></i> Gemini </div>
+          <div class="ai-pill"><i class="fa-solid fa-pen-nib"></i> Notion AI</div>
+          <div class="ai-pill"><i class="fa-solid fa-wand-magic-sparkles"></i> Framer AI</div>
+          <div class="ai-pill"><i class="fa-solid fa-brain"></i> Stitch AI</div>
+
+          <div class="ai-pill"><i class="fa-solid fa-robot"></i> Antigravity</div>
+          <div class="ai-pill"><i class="fa-solid fa-paintbrush"></i> Loveable </div>
+          <div class="ai-pill"><i class="fa-solid fa-bolt"></i> Claude</div>
+          <div class="ai-pill"><i class="fa-solid fa-pen-nib"></i> Picsart Ai </div>
+          <div class="ai-pill"><i class="fa-solid fa-wand-magic-sparkles"></i> Adobe Firefly </div>
+          <div class="ai-pill"><i class="fa-solid fa-brain"></i> UnDraw</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work Section -->
+    <section class="work-section" id="work">
+      <div class="section-header reveal-item">
+        <h2>Work</h2>
+        <div class="skills-pills">
+          <button class="pill active" data-filter="all">All</button>
+          <button class="pill" data-filter="ui-ux">UI/UX Design</button>
+          <button class="pill" data-filter="research">User Research</button>
+          <button class="pill" data-filter="web">Web Design</button>
+        </div>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project Card 1 -->
+        <article class="project-card reveal-card" data-category="web">
+          <div class="card-image">
+            <img src="./public/images/donut.jpeg" alt="Learning Management System (LMS)"
+              style="width: 100%; height: 100%; object-fit: cover;"
+              onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(90deg, #A7D477 0%, #A7D477 25%, #F9C64F 25%, #F9C64F 50%, #AB81CD 50%, #AB81CD 75%, #F0766B 75%, #F0766B 100%)';">
+            <a href="case-study0.html" class="card-overlay">
+              <span>View Case Study</span>
+            </a>
+          </div>
+          <div class="card-info">
+            <h3>Donut Presentation</h3>
+            <p>UI/UX Design / Animation</p>
+          </div>
+
+        </article>
+
+        <!-- Project Card 2 -->
+        <article class="project-card reveal-card" data-category="ui-ux">
+          <div class="card-image">
+            <img src="./public/images/school.png" alt="Learning Management System (LMS)"
+              style="width: 100%; height: 100%; object-fit: cover;"
+              onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(90deg, #A7D477 0%, #A7D477 25%, #F9C64F 25%, #F9C64F 50%, #AB81CD 50%, #AB81CD 75%, #F0766B 75%, #F0766B 100%)';">
+            <a href="#" class="card-overlay">
+              <span>Coming Soon</span>
+            </a>
+          </div>
+          <div class="card-info">
+            <h3>Online School <span class="badge-coming-soon">Coming Soon</span></h3>
+            <p>End-to-End Design / Internal Tool</p>
+          </div>
+        </article>
+
+        <!-- New UI/UX Card -->
+        <article class="project-card reveal-card" data-category="ui-ux">
+          <!-- Using an image with a fallback gradient -->
+          <div class="card-image">
+            <img src="./public/images/lms.png" alt="Learning Management System (LMS)"
+              style="width: 100%; height: 100%; object-fit: cover;"
+              onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(90deg, #A7D477 0%, #A7D477 25%, #F9C64F 25%, #F9C64F 50%, #AB81CD 50%, #AB81CD 75%, #F0766B 75%, #F0766B 100%)';">
+            <a href="case-study.html" class="card-overlay">
+              <span>View Case Study</span>
+            </a>
+          </div>
+          <div class="card-info">
+            <h3>Learning Management System (LMS)</h3>
+            <p>UI/UX Design / Research</p>
+          </div>
+        </article>
+
+        <article class="project-card reveal-card" data-category="ui-ux">
+          <!-- Using an image with a fallback gradient -->
+          <div class="card-image">
+            <img src="./public/images/cp.png" alt="Donut" style="width: 100%; height: 100%; object-fit: cover;"
+              onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(90deg, #A7D477 0%, #A7D477 25%, #F9C64F 25%, #F9C64F 50%, #AB81CD 50%, #AB81CD 75%, #F0766B 75%, #F0766B 100%)';">
+            <a href="case-study1.html" class="card-overlay">
+              <span>View Case Study</span>
+            </a>
+          </div>
+          <div class="card-info">
+            <h3>Contractor Portfolio</h3>
+            <p>UI/UX Design / Visual Identity</p>
+          </div>
+        </article>
+
+        <article class="project-card reveal-card" data-category="ui-ux">
+          <!-- Using an image with a fallback gradient -->
+          <div class="card-image">
+            <img src="./public/images/canon.png" alt="Popsicle Packaging"
+              style="width: 100%; height: 100%; object-fit: cover;"
+              onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(90deg, #A7D477 0%, #A7D477 25%, #F9C64F 25%, #F9C64F 50%, #AB81CD 50%, #AB81CD 75%, #F0766B 75%, #F0766B 100%)';">
+            <a href="case-study2.html" class="card-overlay">
+              <span>View Case Study</span>
+            </a>
+          </div>
+          <div class="card-info">
+            <h3>Canon Camera Web Design</h3>
+            <p>UI/UX Design / Visual Identity</p>
+          </div>
+        </article>
+
+        <article class="project-card reveal-card" data-category="ui-ux">
+          <!-- Using an image with a fallback gradient -->
+          <div class="card-image">
+            <img src="./public/images/psicle-packaging.png.png" alt="Popsicle Packaging"
+              style="width: 100%; height: 100%; object-fit: cover;"
+              onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(90deg, #A7D477 0%, #A7D477 25%, #F9C64F 25%, #F9C64F 50%, #AB81CD 50%, #AB81CD 75%, #F0766B 75%, #F0766B 100%)';">
+            <a href="case-study3.html" class="card-overlay">
+              <span>View Case Study</span>
+            </a>
+          </div>
+          <div class="card-info">
+            <h3>Popsicle Packaging</h3>
+            <p>UI/UX Design / Visual Identity</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="view-more-container" style="display: flex; justify-content: center; margin-top: 3rem; width: 100%;">
+        <button id="view-more-btn" class="btn-outline dark">View More <i class="fa-solid fa-arrow-down"></i></button>
+      </div>
+    </section>
+
+    <!-- Academic Projects Section -->
+    <section class="academic-section">
+      <div class="academic-header">
+        <h2>Certifications</h2>
+        <p>Some time ago in a university far, far away...</p>
+      </div>
+
+      <div class="academic-list">
+        <!-- Project 1 -->
+        <div class="academic-item" data-certificate="./public/images/inter1.jpg">
+          <div class="academic-left">
+            <i class="fa-solid fa-user"></i>
+            <span class="project-name">Frontend Web Development</span>
+            <span class="separator">—</span>
+            <span class="project-tags">UI/UX, Animation </span>
+          </div>
+          <div class="project-reveal-image">
+            <img src="./public/images/techvritti.jpg" alt="Savee.It Gamification"
+              style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+        </div>
+
+        <!-- Project 2 (Bisoi) -->
+        <div class="academic-item active" data-certificate="./public/images/crt3.jpeg">
+          <!-- Make one active by default for demo -->
+          <div class="academic-left">
+            <i class="fa-solid fa-user-group"></i>
+            <span class="project-name">Microsoft UX Design</span>
+            <span class="separator">—</span>
+            <span class="project-tags">User Research</span>
+          </div>
+          <div class="project-reveal-image">
+            <img src="./public/images/micro.jpg" alt="Bisoi Rural Development"
+              style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="academic-item" data-certificate="./public/images/crt2.jpg">
+          <div class="academic-left">
+            <i class="fa-solid fa-user"></i>
+            <span class="project-name">Core Concepts</span>
+            <span class="separator">—</span>
+            <span class="project-tags">UI/UX, Mobile App</span>
+          </div>
+          <div class="project-reveal-image">
+            <img src="./public/images/nexel.jpg" alt="Trackrr." style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="academic-item" data-certificate="./public/images/Certificate_155.jpg">
+          <div class="academic-left">
+            <i class="fa-solid fa-user"></i>
+            <span class="project-name">Seven Zero</span>
+            <span class="separator">—</span>
+            <span class="project-tags">Logo Design</span>
+          </div>
+          <div class="project-reveal-image">
+            <img src="./public/images/knovi.jpg" alt="Seven Zero" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    </section>
+
+    <!-- Playground Section -->
+    <section class="playground-section">
+      <div class="playground-header">
+        <h2>Playground</h2>
+        <p>Explorations that didn't make it to the main stage...</p>
+      </div>
+
+      <div class="marquee-container">
+        <div class="marquee-track">
+          <!-- Set 1 -->
+          <div class="playground-card placeholder-1">
+            <video autoplay loop muted playsinline src="./public/images/logo.mp4" alt="Logo"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;"></video>
+          </div>
+          <div class="playground-card placeholder-2">
+            <img src="./public/images/medini.jpeg" alt="Medini"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
+          </div>
+          <div class="playground-card placeholder-3">
+            <img src="./public/images/demis.jpeg" alt="Demis"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
+          </div>
+          <div class="playground-card placeholder-1">
+            <video autoplay loop muted playsinline src="./public/images/end.mp4" alt="End"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;"></video>
+          </div>
+          <div class="playground-card placeholder-4">
+            <img src="./public/images/footbal.jpeg" alt="Football"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
+          </div>
+          <div class="playground-card placeholder-1">
+            <img src="./public/images/Poster.jpeg" alt="Poster"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
+          </div>
+
+          <!-- Set 2 (Duplicate for infinite loop) -->
+          <div class="playground-card placeholder-1">
+            <video autoplay loop muted playsinline src="./public/images/marvel.mp4" alt="Marvel"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;"></video>
+          </div>
+          <div class="playground-card placeholder-2">
+            <img src="./public/images/coffee.jpeg" alt="Coffee"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
+          </div>
+          <div class="playground-card placeholder-3">
+            <img src="./public/images/micro.jpg" alt="Micro"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
+          </div>
+          <div class="playground-card placeholder-1">
+            <video autoplay loop muted playsinline src="./public/images/end.mp4" alt="End"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;"></video>
+          </div>
+          <div class="playground-card placeholder-4">
+            <img src="./public/images/psicle-packaging.png.png" alt="Packaging"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
+          </div>
+          <div class="playground-card placeholder-1">
+            <img src="./public/images/techvritti.jpg" alt="Techvritti"
+              style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+      <div class="contact-grid">
+        <div class="contact-left">
+          <h2>Contact</h2>
+        </div>
+
+        <div class="contact-right">
+          <p class="contact-pitch">
+            Interested in working together or have a project in mind? <br>Feel free to reach out. I’m always open to
+            discussing new ideas and opportunities
+          </p>
+
+          <div class="">
+            <!-- Placeholder for the GIF -->
+            <img src="./public/images/Contactus.gif" alt="Working hard">
+          </div>
+
+          <div class="contact-actions">
+            <a href="mailto:name@example.com" class="btn-white">Reach Out <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="mailto:name@example.com" class="email-link">yadhukrishnan0718@gmail.com</a>
+          </div>
+
+          <div class="social-area">
+            <p>You can also find me on —</p>
+            <div class="social-links-row">
+              <a href="https://www.linkedin.com/in/yadhukrishnankv/" class="social-pill"><i
+                  class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
+              <a href="https://www.behance.net/yadhukrishnan161" class="social-pill"><i
+                  class="fa-brands fa-behance"></i> Behance</a>
+              <a href="#" class="social-pill"><i class="fa-brands fa-instagram"></i> Instagram</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="site-footer" style="display: none;">
+        <!-- Hiding old footer -->
+      </footer>
+    </section>
+
+    <!-- Grand Footer -->
+    <!-- Game Footer Section -->
+    <!-- Minimal Dino Game Footer -->
+    <footer class="dino-footer">
+      <div class="dino-container">
+        <div class="dino-header-row">
+          <div class="dino-branding">
+            <span class="dino-subtitle">// INTERACTIVE FOOTER</span>
+            <h3>Run, Yadhu, Run!</h3>
+          </div>
+          <div class="dino-score-board">
+            SCORE: <span id="dinoScore">00000</span>
+          </div>
+        </div>
+
+        <div class="dino-game-wrapper">
+          <canvas id="dinoCanvas"></canvas>
+
+          <!-- Overlay UI -->
+          <div class="dino-overlay" id="dinoOverlay">
+            <div class="dino-msg" id="dinoMsg">PRESS SPACE TO START</div>
+            <button class="dino-restart-btn" id="dinoRestartBtn" style="display: none;">RESTART</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-copyright">
+        <a href="#home" class="back-to-home-btn">Back to Home <i class="fa-solid fa-arrow-up"></i></a>
+        <p>© 2026 Yadhu Krishna. All rights reserved.</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Certificate Image Modal -->
+  <div id="certificate-modal" class="certificate-modal">
+    <span class="close-certificate-modal">&times;</span>
+    <img class="certificate-modal-content" id="certificate-modal-img">
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

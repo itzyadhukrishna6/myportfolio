@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning Management System (LMS)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/src/style.css">
+    <style>
+        /* Preliminary Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-family: 'Inter', sans-serif;
+            background-color: #F2F2F2;
+            color: #000000;
+            overflow-x: hidden;
+        }
+    </style>
+    <style>
+        /* Hide loader immediately if visited */
+        html.skip-loader .loading-screen {
+            display: none;
+        }
+
+        html.skip-loader .cs-title,
+        html.skip-loader .cs-subtitle,
+        html.skip-loader .reveal-item {
+            opacity: 1;
+            transform: none;
+        }
+
+        html.skip-loader .navbar {
+            opacity: 1;
+            transform: translateX(-50%);
+        }
+    </style>
+    <script>
+        if (sessionStorage.getItem('hasVisited')) {
+            document.documentElement.classList.add('skip-loader');
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Cursor Follower -->
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <header class="navbar">
+        <div class="nav-brand" style="position: relative;">
+            <a href="/" style="color: inherit; text-decoration: none;">YADHUKRISHNA</a>
+        </div>
+        <nav>
+            <div class="nav-links desktop-only">
+                <a href="/#about" class="nav-link">About</a>
+                <a href="/#work" class="nav-link">Work</a>
+                <a href="/#contact" class="nav-link">Contact</a>
+            </div>
+            <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Menu">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </button>
+        </nav>
+
+        <!-- Hanging Framer Theme Switch -->
+        <div class="theme-switch-wrapper" id="theme-switch-wrapper">
+            <div class="theme-string" id="theme-string"></div>
+            <div class="theme-box" id="theme-pull-box">
+                <i class="fa-solid fa-moon"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobile-menu-overlay">
+        <div class="mobile-menu-content">
+            <div class="mobile-menu-header">
+                <div class="mobile-brand">Yadhukrishna</div>
+                <button class="close-menu-btn" id="close-menu-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="mobile-nav-links">
+                <a href="/#about" class="mobile-nav-link">ABOUT</a>
+                <a href="/#work" class="mobile-nav-link">WORK</a>
+                <a href="/#contact" class="mobile-nav-link">CONTACT</a>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        <!-- Case Study Hero Section -->
+        <section class="cs-hero" id="cs-home">
+            <div class="cs-hero-content">
+                <div class="cs-breadcrumb reveal-item">
+                    <a href="index.html#work"><i class="fa-solid fa-arrow-left"></i> Back to Work</a>
+                </div>
+                <h1 class="cs-title reveal-item">
+                    Learning Management System (LMS)
+                </h1>
+                <p class="cs-subtitle reveal-item">UI/UX Design / Visual Identity</p>
+            </div>
+            <div class="cs-hero-image reveal-item">
+                <img src="./public/images/psicle-packaging.png.png" alt="Popsicle Packaging Hero"
+                    style="width: 100%; max-height: 70vh; object-fit: cover; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+            </div>
+        </section>
+
+        <!-- Case Study Details Overview -->
+        <section class="cs-overview" data-theme="dark">
+            <div class="cs-overview-grid">
+                <div class="cs-overview-col">
+                    <h3>Role</h3>
+                    <p>Lead UI/UX Designer, Visual Designer</p>
+                </div>
+                <div class="cs-overview-col">
+                    <h3>Timeline</h3>
+                    <p>4 Weeks</p>
+                </div>
+                <div class="cs-overview-col">
+                    <h3>Tools</h3>
+                    <p>Figma, Adobe Illustrator, Adobe Photoshop</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Study Content -->
+        <section class="cs-content-section"
+            style="padding: 100px var(--spacing-container); background-color: var(--bg-light);">
+
+            <div class="cs-text-block reveal-item" style="max-width: 800px; margin: 0 auto 60px;">
+                <h2
+                    style="font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 800; font-family: var(--font-primary); letter-spacing: -0.05em; margin-bottom: 2rem;">
+                    Overview</h2>
+                <p style="font-size: 1.25rem; line-height: 1.6; color: #444; margin-bottom: 1.5rem;">
+                    The Popsicle Packaging project aimed to revitalize the brand identity and packaging design of a
+                    beloved local ice cream brand. The challenge was to maintain the nostalgic appeal while introducing
+                    a modern, vibrant aesthetic that stands out on grocery store shelves and appeals to a younger
+                    demographic without alienating existing customers.
+                </p>
+                <p style="font-size: 1.25rem; line-height: 1.6; color: #444;">
+                    Our strategy revolved around bold typography, playful color palettes reflective of the flavors, and
+                    clean, minimalist layouts that communicate quality and freshness.
+                </p>
+            </div>
+
+            <div class="cs-image-full reveal-item"
+                style="width: 100%; border-radius: 20px; overflow: hidden; margin-bottom: 60px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                <video autoplay loop muted playsinline src="./public/images/ice.mp4" alt="Process work"
+                    style="width: 100%; display: block;">
+            </div>
+
+            <div class="cs-text-block reveal-item" style="max-width: 800px; margin: 0 auto 60px;">
+                <h2
+                    style="font-size: clamp(2.5rem, 4vw, 4rem); font-weight: 800; font-family: var(--font-primary); letter-spacing: -0.05em; margin-bottom: 2rem;">
+                    Design Process</h2>
+                <p style="font-size: 1.25rem; line-height: 1.6; color: #444; margin-bottom: 1.5rem;">
+                    We started with extensive market and competitor research. Observing how competitors utilized color
+                    and imagery, we realized there was an opportunity to use a more graphic, illustration-led approach.
+                    We developed a distinct visual language based on geometric shapes and vibrant gradients to represent
+                    each unique flavor.
+                </p>
+            </div>
+
+            <!-- Two Column Image layout -->
+            <div class="cs-image-grid reveal-item"
+                style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 100px;">
+                <div class="cs-image-box"
+                    style="border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    <img src="./public/images/p2.jpg" alt="Alternative flavor"
+                        style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                </div>
+                <div class="cs-image-box"
+                    style="border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                    <img src="./public/images/p3.1.jpg" alt="Photography usage"
+                        style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Next Case Study -->
+        <section class="next-cs-section"
+            style="padding: 100px var(--spacing-container); background-color: #000; color: white; text-align: center; cursor: pointer; transition: background-color 0.3s;"
+            onmouseover="this.style.backgroundColor='#111'" onmouseout="this.style.backgroundColor='#000'"
+            onclick="window.location.href='/'">
+            <p
+                style="text-transform: uppercase; letter-spacing: 2px; font-weight: 600; color: #888; margin-bottom: 1rem;">
+                Next Project</p>
+            <h2
+                style="font-size: clamp(3rem, 6vw, 6rem); font-weight: 800; font-family: var(--font-primary); margin: 0;">
+                <a href="case-study0.html">Donut</a> <i class="fa-solid fa-arrow-right"
+                    style="transform: rotate(-45deg); font-size: 0.8em;"></i>
+            </h2>
+        </section>
+
+        <!-- Contact Section Removed -->
+
+        <footer class="dino-footer">
+            <div class="dino-container">
+                <div class="dino-header-row">
+                    <div class="dino-branding">
+                        <span class="dino-subtitle">// INTERACTIVE FOOTER</span>
+                        <h3>Run, Yadhu, Run!</h3>
+                    </div>
+                    <div class="dino-score-board">
+                        SCORE: <span id="dinoScore">00000</span>
+                    </div>
+                </div>
+
+                <div class="dino-game-wrapper">
+                    <canvas id="dinoCanvas"></canvas>
+
+                    <!-- Overlay UI -->
+                    <div class="dino-overlay" id="dinoOverlay">
+                        <div class="dino-msg" id="dinoMsg">PRESS SPACE TO START</div>
+                        <button class="dino-restart-btn" id="dinoRestartBtn" style="display: none;">RESTART</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom-copyright">
+                <a href="#cs-home" class="back-to-home-btn">Back to Top <i class="fa-solid fa-arrow-up"></i></a>
+                <p>© 2026 Yadhu Krishna. All rights reserved.</p>
+            </div>
+        </footer>
+
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>
