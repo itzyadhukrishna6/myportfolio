@@ -1,0 +1,32 @@
+{
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    { "source": "/case-study",  "destination": "/case-study.html" },
+    { "source": "/case-study0", "destination": "/case-study0.html" },
+    { "source": "/case-study1", "destination": "/case-study1.html" },
+    { "source": "/case-study2", "destination": "/case-study2.html" },
+    { "source": "/case-study3", "destination": "/case-study3.html" }
+  ],
+  "headers": [
+    {
+      "source": "/public/images/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.css",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    }
+  ]
+}

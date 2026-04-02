@@ -196,9 +196,8 @@ function startLoader() {
     const line = document.querySelector('.loading-line');
     const lineContainer = document.querySelector('.loading-line-container');
 
-    // FOR TESTING: Always run the loader. 
-    // Comment this `hasVisited = false` out when you deploy to production so it skips the loader on return visits!
-    const hasVisited = false; // sessionStorage.getItem('hasVisited');
+    // Production: Skip loader on return visits within the same session
+    const hasVisited = sessionStorage.getItem('hasVisited');
 
     // If loader element is missing, or we already visited, just reveal content instantly
     if (!loader || hasVisited) {
