@@ -10,12 +10,12 @@ export default defineConfig({
     // Split chunks for better caching
     rollupOptions: {
       input: {
-        main:         resolve(__dirname, 'index.html'),
-        'case-study':  resolve(__dirname, 'case-study.html'),
-        'case-study0': resolve(__dirname, 'case-study0.html'),
-        'case-study1': resolve(__dirname, 'case-study1.html'),
-        'case-study2': resolve(__dirname, 'case-study2.html'),
-        'case-study3': resolve(__dirname, 'case-study3.html'),
+        main: resolve(__dirname, 'index.html'),
+        caseStudy: resolve(__dirname, 'case-study.html'),
+        caseStudy0: resolve(__dirname, 'case-study0.html'),
+        caseStudy1: resolve(__dirname, 'case-study1.html'),
+        caseStudy2: resolve(__dirname, 'case-study2.html'),
+        caseStudy3: resolve(__dirname, 'case-study3.html'),
       },
       output: {
         manualChunks: {
