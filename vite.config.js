@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import { resolve } from 'path';
 
 export default defineConfig({
   build: {
@@ -8,6 +9,14 @@ export default defineConfig({
     assetsInlineLimit: 4096,
     // Split chunks for better caching
     rollupOptions: {
+      input: {
+        main:         resolve(__dirname, 'index.html'),
+        'case-study':  resolve(__dirname, 'case-study.html'),
+        'case-study0': resolve(__dirname, 'case-study0.html'),
+        'case-study1': resolve(__dirname, 'case-study1.html'),
+        'case-study2': resolve(__dirname, 'case-study2.html'),
+        'case-study3': resolve(__dirname, 'case-study3.html'),
+      },
       output: {
         manualChunks: {
           // Vendor chunk — cached separately across deploys
