@@ -5,13 +5,36 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio - Yadhukrishna</title>
+  <title>Yadhukrishna | UI/UX Developer &amp; Visual Designer</title>
+  <meta name="description"
+    content="Portfolio of Yadhukrishna — UI/UX Developer at Deloitte crafting intuitive digital experiences. View case studies in UX Design, Web Design &amp; Research.">
+  <meta name="theme-color" content="#F2F2F2" />
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Yadhukrishna | UI/UX Developer">
+  <meta property="og:description"
+    content="UI/UX Developer crafting intuitive digital experiences. Based in Kannur, Kerala.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/profile">
+
+  <!-- Preload critical hero image (LCP candidate) -->
+  <link rel="preload" as="image"
+    href="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/profile" fetchpriority="high">
+
+  <!-- Google Fonts: preconnect before stylesheet -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;600;700;800&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Font Awesome (non-render-blocking) -->
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  </noscript>
+
   <link rel="stylesheet" href="/src/style.css">
   <style>
     /* Preliminary Reset */
@@ -55,9 +78,7 @@
 
 <body>
   <!-- Loading Screen -->
-  <!-- Loading Screen -->
-  <!-- Loading Screen -->
-  <div class="loading-screen">
+  <div class="loading-screen" role="status" aria-label="Loading portfolio">
     <div class="loading-bg"></div>
     <div class="loader-content">
       <div class="loading-text">
@@ -129,7 +150,8 @@
         <!-- Profile & Status -->
         <div class="profile-container-row reveal-item">
           <div class="profile-image-wrapper">
-            <img src="./public/images/profile.jpeg" alt="Yadhu Krishna Profile"
+            <img src="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/profile"
+              alt="Yadhu Krishna — UI/UX Developer" fetchpriority="high"
               onerror="this.onerror=null; this.src='https://via.placeholder.com/150';" />
           </div>
           <div class="current-info">
@@ -419,58 +441,66 @@
       </div>
 
       <div class="academic-list">
-        <!-- Project 1 -->
-        <div class="academic-item" data-certificate="./public/images/inter1.jpg">
+        <div class="academic-item"
+          data-certificate="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/Inter1">
           <div class="academic-left">
-            <i class="fa-solid fa-user"></i>
+            <i class="fa-solid fa-user" aria-hidden="true"></i>
             <span class="project-name">Frontend Web Development</span>
             <span class="separator">—</span>
             <span class="project-tags">UI/UX, Animation </span>
           </div>
           <div class="project-reveal-image">
-            <img src="./public/images/techvritti.jpg" alt="Savee.It Gamification"
+            <img src="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/techvritti"
+              alt="Techvritti — Frontend Development Certificate" loading="lazy" decoding="async"
               style="width: 100%; height: 100%; object-fit: cover;">
           </div>
         </div>
 
         <!-- Project 2 (Bisoi) -->
-        <div class="academic-item active" data-certificate="./public/images/crt3.jpeg">
-          <!-- Make one active by default for demo -->
+        <div class="academic-item active"
+          data-certificate="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/crt3">
           <div class="academic-left">
-            <i class="fa-solid fa-user-group"></i>
+            <i class="fa-solid fa-user-group" aria-hidden="true"></i>
             <span class="project-name">Microsoft UX Design</span>
             <span class="separator">—</span>
             <span class="project-tags">User Research</span>
           </div>
           <div class="project-reveal-image">
-            <img src="./public/images/micro.jpg" alt="Bisoi Rural Development"
+            <img src="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/micro"
+              alt="Microsoft UX Design Certificate" loading="lazy" decoding="async"
               style="width: 100%; height: 100%; object-fit: cover;">
           </div>
         </div>
 
         <!-- Project 3 -->
-        <div class="academic-item" data-certificate="./public/images/crt2.jpg">
+        <div class="academic-item"
+          data-certificate="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/crt2">
           <div class="academic-left">
-            <i class="fa-solid fa-user"></i>
+            <i class="fa-solid fa-user" aria-hidden="true"></i>
             <span class="project-name">Core Concepts</span>
             <span class="separator">—</span>
             <span class="project-tags">UI/UX, Mobile App</span>
           </div>
           <div class="project-reveal-image">
-            <img src="./public/images/nexel.jpg" alt="Trackrr." style="width: 100%; height: 100%; object-fit: cover;">
+            <img src="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/nexel"
+              alt="Core Concepts UI/UX Certificate" loading="lazy" decoding="async"
+              style="width: 100%; height: 100%; object-fit: cover;">
           </div>
         </div>
 
         <!-- Project 4 -->
-        <div class="academic-item" data-certificate="./public/images/Certificate_155.jpg">
+        <div class="academic-item"
+          data-certificate="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/Certificate_155">
           <div class="academic-left">
-            <i class="fa-solid fa-user"></i>
+            <i class="fa-solid fa-user" aria-hidden="true"></i>
             <span class="project-name">Seven Zero</span>
             <span class="separator">—</span>
             <span class="project-tags">Logo Design</span>
           </div>
           <div class="project-reveal-image">
-            <img src="./public/images/knovi.jpg" alt="Seven Zero" style="width: 100%; height: 100%; object-fit: cover;">
+            <img src="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/knovi"
+              alt="Seven Zero Logo Design" loading="lazy" decoding="async"
+              style="width: 100%; height: 100%; object-fit: cover;">
           </div>
         </div>
       </div>
@@ -487,55 +517,71 @@
 
       <div class="marquee-container">
         <div class="marquee-track">
-          <!-- Set 1 -->
+          <!-- Playground videos: use data-src for lazy loading via IntersectionObserver -->
           <div class="playground-card placeholder-1">
-            <video autoplay loop muted playsinline src="./public/images/logo.mp4" alt="Logo"
+            <video autoplay loop muted playsinline preload="none"
+              data-src="https://res.cloudinary.com/dzrl60hnm/video/upload/v1775581418/portfolio/end.mp4"
+              aria-label="Logo animation"
               style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;"></video>
           </div>
           <div class="playground-card placeholder-2">
-            <img src="./public/images/medini.jpeg" alt="Medini"
+            <img src="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/medini"
+              alt="Medini visual exploration" loading="lazy" decoding="async"
               style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
           </div>
           <div class="playground-card placeholder-3">
-            <img src="./public/images/demis.jpeg" alt="Demis"
+            <img src="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/demis"
+              alt="Demis visual exploration" loading="lazy" decoding="async"
               style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
           </div>
           <div class="playground-card placeholder-1">
-            <video autoplay loop muted playsinline src="./public/images/end.mp4" alt="End"
+            <video autoplay loop muted playsinline preload="none"
+              data-src="https://res.cloudinary.com/dzrl60hnm/video/upload/v1775581441/portfolio/logo.mp4"
+              aria-label="End animation"
               style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;"></video>
           </div>
           <div class="playground-card placeholder-4">
-            <img src="./public/images/footbal.jpeg" alt="Football"
+            <img src="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/footbal"
+              alt="Football visual artwork" loading="lazy" decoding="async"
               style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
           </div>
           <div class="playground-card placeholder-1">
-            <img src="./public/images/Poster.jpeg" alt="Poster"
+            <img src="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/Poster"
+              alt="Poster design" loading="lazy" decoding="async"
               style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
           </div>
 
           <!-- Set 2 (Duplicate for infinite loop) -->
           <div class="playground-card placeholder-1">
-            <video autoplay loop muted playsinline src="./public/images/marvel.mp4" alt="Marvel"
+            <video autoplay loop muted playsinline preload="none"
+              data-src="https://res.cloudinary.com/dzrl60hnm/video/upload/q_auto:auto/portfolio/logo"
+              aria-label="Logo animation duplicate"
               style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;"></video>
           </div>
           <div class="playground-card placeholder-2">
-            <img src="./public/images/coffee.jpeg" alt="Coffee"
+            <img src="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/coffee"
+              alt="Coffee visual exploration" loading="lazy" decoding="async"
               style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
           </div>
           <div class="playground-card placeholder-3">
-            <img src="./public/images/micro.jpg" alt="Micro"
+            <img src="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/micro"
+              alt="Micro visual artwork" loading="lazy" decoding="async"
               style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
           </div>
           <div class="playground-card placeholder-1">
-            <video autoplay loop muted playsinline src="./public/images/end.mp4" alt="End"
+            <video autoplay loop muted playsinline preload="none"
+              data-src="https://res.cloudinary.com/dzrl60hnm/video/upload/q_auto:auto/portfolio/end"
+              aria-label="End animation duplicate"
               style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;"></video>
           </div>
           <div class="playground-card placeholder-4">
-            <img src="./public/images/psicle-packaging.png.png" alt="Packaging"
+            <img src="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/psicle-packaging"
+              alt="Popsicle packaging design" loading="lazy" decoding="async"
               style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
           </div>
           <div class="playground-card placeholder-1">
-            <img src="./public/images/techvritti.jpg" alt="Techvritti"
+            <img src="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/techvritti"
+              alt="Techvritti design" loading="lazy" decoding="async"
               style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
           </div>
         </div>
@@ -556,13 +602,15 @@
           </p>
 
           <div class="">
-            <!-- Placeholder for the GIF -->
-            <img src="./public/images/Contactus.gif" alt="Working hard">
+            <!-- Contact GIF -->
+            <img src="https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,fl_animated,f_auto/portfolio/Contactus"
+              alt="Working hard — animated illustration" loading="lazy">
           </div>
 
           <div class="contact-actions">
-            <a href="mailto:name@example.com" class="btn-white">Reach Out <i class="fa-solid fa-arrow-right"></i></a>
-            <a href="mailto:name@example.com" class="email-link">yadhukrishnan0718@gmail.com</a>
+            <a href="mailto:yadhukrishnan0718@gmail.com" class="btn-white">Reach Out <i
+                class="fa-solid fa-arrow-right"></i></a>
+            <a href="mailto:yadhukrishnan0718@gmail.com" class="email-link">yadhukrishnan0718@gmail.com</a>
           </div>
 
           <div class="social-area">
@@ -618,10 +666,24 @@
   </main>
 
   <!-- Certificate Image Modal -->
-  <div id="certificate-modal" class="certificate-modal">
-    <span class="close-certificate-modal">&times;</span>
-    <img class="certificate-modal-content" id="certificate-modal-img">
+  <div id="certificate-modal" class="certificate-modal" role="dialog" aria-modal="true"
+    aria-label="Certificate preview">
+    <span class="close-certificate-modal" role="button" tabindex="0" aria-label="Close certificate">&times;</span>
+    <img class="certificate-modal-content" id="certificate-modal-img" alt="Certificate">
   </div>
+
+  <script>
+    // Close certificate modal on Escape key — accessibility
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        const modal = document.getElementById('certificate-modal');
+        if (modal && modal.style.display !== 'none') {
+          modal.style.display = 'none';
+          document.body.classList.remove('no-scroll');
+        }
+      }
+    });
+  </script>
 
   <script type="module" src="/src/main.js"></script>
 </body>

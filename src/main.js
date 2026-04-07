@@ -25,41 +25,64 @@ function raf(time) {
 requestAnimationFrame(raf);
 
 // --- Scrolling Sound Effect ---
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+// AudioContext is created lazily on first user interaction to satisfy
+// browser autoplay policies — avoids the DOMException on page load.
+let audioCtx = null;
 let lastScrollY = 0;
 let soundEnabled = true;
 
 // GLOBAL VOLUME STATE
 let globalVolume = 1.0;
 
-// Attempt to forcefully resume the audio engine immediately on page load
-if (audioCtx.state === 'suspended') {
-    audioCtx.resume().catch(e => console.warn('Browser Autoplay Policy blocked the sound on load.'));
+/**
+ * Lazily initialise and resume the AudioContext.
+ * Safe to call multiple times — returns existing ctx after first call.
+ */
+function getAudioContext() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    if (audioCtx.state === 'suspended') {
+        audioCtx.resume().catch(() => {});
+    }
+    return audioCtx;
 }
 
-function playScrollTick(velocity) {
-    if (!soundEnabled || globalVolume === 0) return;
+// Unlock AudioContext on first meaningful user gesture
+const _unlockAudio = () => {
+    getAudioContext();
+    document.removeEventListener('click', _unlockAudio);
+    document.removeEventListener('keydown', _unlockAudio);
+    document.removeEventListener('touchstart', _unlockAudio);
+};
+document.addEventListener('click', _unlockAudio, { once: true });
+document.addEventListener('keydown', _unlockAudio, { once: true });
+document.addEventListener('touchstart', _unlockAudio, { once: true });
 
-    const osc = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
+function playScrollTick(velocity) {
+    if (!soundEnabled || globalVolume === 0 || !audioCtx) return;
+
+    const ctx = getAudioContext();
+    const osc = ctx.createOscillator();
+    const gainNode = ctx.createGain();
 
     osc.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
+    gainNode.connect(ctx.destination);
 
     osc.type = 'sine';
     // Frequency sweep downward creates a nice "tick" or "click" sound
-    osc.frequency.setValueAtTime(600, audioCtx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.02);
+    osc.frequency.setValueAtTime(600, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(100, ctx.currentTime + 0.02);
 
     // Subtle volume scaling based on velocity to make fast scrolling feel dynamic
-    let vol = Math.min(0.2, 0.05 + Math.abs(velocity) * 0.005) * globalVolume; // Increased volume significantly
+    let vol = Math.min(0.2, 0.05 + Math.abs(velocity) * 0.005) * globalVolume;
 
-    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-    gainNode.gain.linearRampToValueAtTime(vol, audioCtx.currentTime + 0.002);
-    gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.02);
+    gainNode.gain.setValueAtTime(0, ctx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(vol, ctx.currentTime + 0.002);
+    gainNode.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.02);
 
     osc.start();
-    osc.stop(audioCtx.currentTime + 0.03);
+    osc.stop(ctx.currentTime + 0.03);
 }
 
 // Add variables for marquee tweens
@@ -105,6 +128,9 @@ lenis.on('scroll', (e) => {
 
         let targetTimeScale = speedMultiplier * scrollDirection;
 
+        // Fix: single shared reset timer — not one per-tween — to avoid race conditions
+        clearTimeout(window.marqueeResetTimer);
+
         marqueeTweens.forEach(({ tween }) => {
             gsap.to(tween, {
                 timeScale: targetTimeScale,
@@ -112,12 +138,13 @@ lenis.on('scroll', (e) => {
                 ease: "power2.out",
                 overwrite: "auto"
             });
-
-            clearTimeout(window.marqueeResetTimer);
-            window.marqueeResetTimer = setTimeout(() => {
-                gsap.to(tween, { timeScale: 1, duration: 1.2, ease: "power3.out", overwrite: "auto" });
-            }, 100);
         });
+
+        window.marqueeResetTimer = setTimeout(() => {
+            marqueeTweens.forEach(({ tween }) => {
+                gsap.to(tween, { timeScale: 1, duration: 1.2, ease: "power3.out", overwrite: "auto" });
+            });
+        }, 100);
     }
 });
 
@@ -125,24 +152,27 @@ lenis.on('scroll', (e) => {
 // Loading Animation
 
 function playLoadingWhoosh() {
-    if (!soundEnabled || audioCtx.state === 'suspended' || globalVolume === 0) return;
-    const osc = audioCtx.createOscillator();
-    const gainNode = audioCtx.createGain();
+    if (!soundEnabled || globalVolume === 0) return;
+    const ctx = getAudioContext();
+    if (!ctx || ctx.state === 'suspended') return;
+
+    const osc = ctx.createOscillator();
+    const gainNode = ctx.createGain();
 
     osc.type = 'sine';
     // Deep whoosh/swell
-    osc.frequency.setValueAtTime(120, audioCtx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(20, audioCtx.currentTime + 1.2);
+    osc.frequency.setValueAtTime(120, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(20, ctx.currentTime + 1.2);
 
-    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
-    gainNode.gain.linearRampToValueAtTime(1.5 * globalVolume, audioCtx.currentTime + 0.3); // Increased Swell up volume to MAX (1.5)
-    gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.2);    // Fade out
+    gainNode.gain.setValueAtTime(0, ctx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(1.5 * globalVolume, ctx.currentTime + 0.3);
+    gainNode.gain.linearRampToValueAtTime(0, ctx.currentTime + 1.2);
 
     osc.connect(gainNode);
-    gainNode.connect(audioCtx.destination);
+    gainNode.connect(ctx.destination);
 
     osc.start();
-    osc.stop(audioCtx.currentTime + 1.2);
+    osc.stop(ctx.currentTime + 1.2);
 }
 
 // --- Volume Control Setup ---
@@ -167,7 +197,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (slider) {
             slider.addEventListener('input', (e) => {
                 syncVolumeUI(e.target.value);
-                if (audioCtx.state === 'suspended') audioCtx.resume();
+                // Init AudioContext on slider interaction (satisfies autoplay policy)
+                getAudioContext();
             });
         }
     });
@@ -177,6 +208,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (icon) {
             icon.style.cursor = 'pointer';
             icon.addEventListener('click', () => {
+                // Init AudioContext on icon click
+                getAudioContext();
                 if (globalVolume > 0) {
                     icon.dataset.lastVol = globalVolume;
                     syncVolumeUI(0);
@@ -196,7 +229,8 @@ function startLoader() {
     const line = document.querySelector('.loading-line');
     const lineContainer = document.querySelector('.loading-line-container');
 
-    // Production: Skip loader on return visits within the same session
+    // Use sessionStorage to skip the loader on return visits within the same tab session.
+    // The loader runs only on the very first page load — subsequent navigations feel instant.
     const hasVisited = sessionStorage.getItem('hasVisited');
 
     // If loader element is missing, or we already visited, just reveal content instantly
@@ -371,35 +405,48 @@ gsap.utils.toArray('.reveal-card').forEach((card, i) => {
 });
 
 // Cursor Follower
+// Hide on touch devices — the cursor div is desktop-only
 const cursor = document.querySelector('.cursor-follower');
 if (cursor) {
-    // 1. Center the cursor div on the mouse coordinates
-    gsap.set(cursor, { xPercent: -50, yPercent: -50 });
+    // Detect touch-capable devices and hide cursor follower
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches;
+    if (isTouchDevice) {
+        cursor.style.display = 'none';
+    } else {
+        // Center the cursor div on the mouse coordinates
+        gsap.set(cursor, { xPercent: -50, yPercent: -50 });
 
-    let mouseX = 0;
-    let mouseY = 0;
+        // Use a rAF loop instead of one gsap.to per mousemove — much cheaper
+        let mouseX = 0, mouseY = 0;
+        let rafPending = false;
 
-    window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-
-        // Move the cursor
-        gsap.to(cursor, {
-            x: mouseX,
-            y: mouseY,
-            duration: 0.1,
-            ease: 'power2.out'
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            if (!rafPending) {
+                rafPending = true;
+                requestAnimationFrame(() => {
+                    gsap.to(cursor, {
+                        x: mouseX,
+                        y: mouseY,
+                        duration: 0.1,
+                        ease: 'power2.out',
+                        overwrite: true
+                    });
+                    rafPending = false;
+                });
+            }
         });
-    });
 
-    // Add active state on hover
-    const interactiveSelectors = 'a, button, .project-card, input, textarea, .custom-i, .academic-item';
-    const interactiveElements = document.querySelectorAll(interactiveSelectors);
-
-    interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('active'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('active'));
-    });
+        // Add active state on hover — use event delegation for efficiency
+        const interactiveSelectors = 'a, button, .project-card, input, textarea, .custom-i, .academic-item';
+        document.addEventListener('mouseover', (e) => {
+            if (e.target.closest(interactiveSelectors)) cursor.classList.add('active');
+        });
+        document.addEventListener('mouseout', (e) => {
+            if (e.target.closest(interactiveSelectors)) cursor.classList.remove('active');
+        });
+    }
 }
 
 // Back to Top Logic
@@ -1122,12 +1169,12 @@ const heroSection = document.querySelector('.hero-section');
 if (trailContainer && heroSection) {
     // Collect a cool array of project/lifestyle images from public payload
     const trailImagesSrc = [
-        './public/images/horn.png',
-        './public/images/h1.png',
-        './public/images/h2.png',
-        './public/images/h3.png',
-        './public/images/h4.png',
-        './public/images/h5.png'
+        'https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/horn',
+        'https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/h1',
+        'https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/h2',
+        'https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/h3',
+        'https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/h4',
+        'https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/h5'
     ];
 
     let trailIndex = 0;
@@ -1135,21 +1182,28 @@ if (trailContainer && heroSection) {
     // Threshold distance (pixels) between spawned images
     const threshold = 100;
 
+    // Throttle trail via rAF so we never call spawnTrailImage faster than 60fps
+    let trailRafPending = false;
     document.addEventListener('mousemove', (e) => {
-        // Prevent trail tracking if hovering over the navbar interactions
-        if (e.target.closest('nav') || e.target.closest('.nav-container')) return;
+        if (trailRafPending) return;
+        trailRafPending = true;
+        requestAnimationFrame(() => {
+            trailRafPending = false;
+            // Prevent trail tracking if hovering over the navbar interactions
+            if (e.target.closest('nav') || e.target.closest('.nav-container')) return;
 
-        // Strictly restrict spawning bounds to inside the hero visual rect
-        const heroRect = heroSection.getBoundingClientRect();
-        if (e.clientY < heroRect.top || e.clientY > heroRect.bottom) return;
+            // Strictly restrict spawning bounds to inside the hero visual rect
+            const heroRect = heroSection.getBoundingClientRect();
+            if (e.clientY < heroRect.top || e.clientY > heroRect.bottom) return;
 
-        const mousePos = { x: e.clientX, y: e.clientY };
-        const dist = Math.hypot(mousePos.x - lastMousePos.x, mousePos.y - lastMousePos.y);
+            const mousePos = { x: e.clientX, y: e.clientY };
+            const dist = Math.hypot(mousePos.x - lastMousePos.x, mousePos.y - lastMousePos.y);
 
-        if (dist > threshold) {
-            lastMousePos = mousePos;
-            spawnTrailImage(mousePos.x, mousePos.y);
-        }
+            if (dist > threshold) {
+                lastMousePos = mousePos;
+                spawnTrailImage(mousePos.x, mousePos.y);
+            }
+        });
     });
 
     function spawnTrailImage(x, y) {
@@ -1207,4 +1261,36 @@ if (trailContainer && heroSection) {
                 ease: "power2.in"
             }, "-=0.5");
     }
+}
+
+/* =========================================
+   Lazy-load playground videos via IntersectionObserver
+   Videos have data-src instead of src so they don't
+   preload — they only start when scrolled into view.
+   ========================================= */
+const lazyVideos = document.querySelectorAll('video[data-src]');
+
+if (lazyVideos.length > 0 && 'IntersectionObserver' in window) {
+    const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const video = entry.target;
+                video.src = video.dataset.src;
+                video.load();
+                video.play().catch(() => {}); // Autoplay may be blocked — handle gracefully
+                videoObserver.unobserve(video);
+            }
+        });
+    }, {
+        // Load slightly before visible so no blank flash
+        rootMargin: '200px'
+    });
+
+    lazyVideos.forEach(video => videoObserver.observe(video));
+} else {
+    // Fallback: load all videos immediately for older browsers
+    lazyVideos.forEach(video => {
+        video.src = video.dataset.src;
+        video.load();
+    });
 }

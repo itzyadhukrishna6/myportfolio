@@ -303,8 +303,9 @@ body.dark-mode .academic-item.active {
   align-items: center;
   z-index: 100;
   background: rgba(242, 242, 242, 0.6);
-  backdrop-filter: blur(20%);
-  -webkit-backdrop-filter: blur(20%);
+  /* Fixed: blur() takes px, not %. 20% is invalid and silently ignored */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
@@ -3066,5 +3067,45 @@ body.dark-mode .back-to-home-btn:hover {
   to {
     transform: scale(1);
     opacity: 1;
+  }
+}
+
+/* =========================================
+   Performance: content-visibility for off-screen sections
+   Tells the browser to skip rendering off-screen sections
+   until they scroll near the viewport. Massive LCP boost.
+   ========================================= */
+.academic-section,
+.playground-section,
+.dino-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 600px; /* Estimated height prevents layout shift */
+}
+
+/* =========================================
+   Accessibility: Respect user motion preferences
+   For users with vestibular disorders or
+   motion sensitivity — disable all animations.
+   ========================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .scrollflow-track,
+  .marquee-track,
+  .ai-track,
+  .orbit-ring,
+  .orbit-item-inner {
+    animation: none !important;
+  }
+
+  .hero-background-lines {
+    animation: none !important;
   }
 }

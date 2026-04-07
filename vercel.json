@@ -1,32 +1,45 @@
 {
-  "framework": "vite",
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "rewrites": [
-    { "source": "/case-study",  "destination": "/case-study.html" },
-    { "source": "/case-study0", "destination": "/case-study0.html" },
-    { "source": "/case-study1", "destination": "/case-study1.html" },
-    { "source": "/case-study2", "destination": "/case-study2.html" },
-    { "source": "/case-study3", "destination": "/case-study3.html" }
-  ],
+  "installCommand": "npm install",
+  "framework": "vite",
   "headers": [
     {
-      "source": "/public/images/(.*)",
+      "source": "/assets/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
-      "source": "/(.*)\\.js",
+      "source": "/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
       ]
-    },
+    }
+  ],
+  "rewrites": [
     {
-      "source": "/(.*)\\.css",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
