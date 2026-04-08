@@ -1166,62 +1166,7 @@ if (playfulEyes.length > 0) {
    Image Path Component (Hero Image Trail)
    ========================================= */
 
-    function spawnTrailImage(x, y) {
-        // Convert client cursor coordinates to match the absolute container rendering cleanly
-        const rect = trailContainer.getBoundingClientRect();
-        const relX = x - rect.left;
-        const relY = y - rect.top;
-
-        const img = document.createElement('img');
-        img.src = trailImagesSrc[trailIndex];
-        img.className = 'trail-image';
-        trailContainer.appendChild(img);
-
-        trailIndex = (trailIndex + 1) % trailImagesSrc.length;
-
-        // Add magnetic random stagger rotation for an organic, hand-dealt card physical sensation
-        const randomRotation = gsap.utils.random(-15, 15);
-
-        // Render parameters
-        gsap.set(img, {
-            x: relX,
-            y: relY,
-            xPercent: -50,
-            yPercent: -50,
-            rotation: randomRotation,
-            scale: 0.2,
-            opacity: 0
-        });
-
-        // The exact physics parameters defining the Trail
-        const tl = gsap.timeline({
-            onComplete: () => {
-                img.remove();
-            }
-        });
-
-        // Orchestrate appearance, drift, and subsequent decay
-        tl.to(img, {
-            scale: 1,
-            opacity: 1,
-            duration: 0.5,
-            ease: "back.out(1.5)"
-        })
-            .to(img, {
-                y: relY - 60, // Magnetic drift upward gradually like gravity decay
-                x: relX + gsap.utils.random(-20, 20),
-                rotation: randomRotation + gsap.utils.random(-10, 10),
-                duration: 1.5,
-                ease: "power2.out"
-            }, "-=0.2")
-            .to(img, {
-                scale: 0.3,
-                opacity: 0,
-                duration: 0.4,
-                ease: "power2.in"
-            }, "-=0.5");
-    }
-}
+    
 
 /* =========================================
    Lazy-load playground videos via IntersectionObserver
