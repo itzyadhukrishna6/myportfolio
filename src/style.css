@@ -437,11 +437,16 @@ body.dark-mode .academic-item.active {
 }
 
 .current-label {
-  font-size: 0.9rem;
+  font-size: 0.7rem;
   color: #666;
   display: block;
   margin-bottom: 4px;
 }
+.current-labell {
+  font-size: 1.2rem;
+  color: #666;
+  display: block;
+  margin-bottom: 4px;
 
 .company-logo {
   font-size: 1.5rem;
