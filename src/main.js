@@ -1165,48 +1165,6 @@ if (playfulEyes.length > 0) {
 /* =========================================
    Image Path Component (Hero Image Trail)
    ========================================= */
-const trailContainer = document.getElementById('image-trail-container');
-const heroSection = document.querySelector('.hero-section');
-
-if (trailContainer && heroSection) {
-    // Collect a cool array of project/lifestyle images from public payload
-    const trailImagesSrc = [
-        'https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/horn',
-        'https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/h1',
-        'https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/h2',
-        'https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/h3',
-        'https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/h4',
-        'https://res.cloudinary.com/dzrl60hnm/image/upload/q_auto,f_auto/portfolio/h5'
-    ];
-
-    let trailIndex = 0;
-    let lastMousePos = { x: 0, y: 0 };
-    // Threshold distance (pixels) between spawned images
-    const threshold = 100;
-
-    // Throttle trail via rAF so we never call spawnTrailImage faster than 60fps
-    let trailRafPending = false;
-    document.addEventListener('mousemove', (e) => {
-        if (trailRafPending) return;
-        trailRafPending = true;
-        requestAnimationFrame(() => {
-            trailRafPending = false;
-            // Prevent trail tracking if hovering over the navbar interactions
-            if (e.target.closest('nav') || e.target.closest('.nav-container')) return;
-
-            // Strictly restrict spawning bounds to inside the hero visual rect
-            const heroRect = heroSection.getBoundingClientRect();
-            if (e.clientY < heroRect.top || e.clientY > heroRect.bottom) return;
-
-            const mousePos = { x: e.clientX, y: e.clientY };
-            const dist = Math.hypot(mousePos.x - lastMousePos.x, mousePos.y - lastMousePos.y);
-
-            if (dist > threshold) {
-                lastMousePos = mousePos;
-                spawnTrailImage(mousePos.x, mousePos.y);
-            }
-        });
-    });
 
     function spawnTrailImage(x, y) {
         // Convert client cursor coordinates to match the absolute container rendering cleanly
